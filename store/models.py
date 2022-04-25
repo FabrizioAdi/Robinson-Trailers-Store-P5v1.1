@@ -17,7 +17,7 @@ class Product(models.Model):
     digital = models.BooleanField(default=False, null=True, blank=True)
 
     def __str__(self):
-		return self.name
+        return self.name
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
@@ -26,7 +26,7 @@ class Order(models.Model):
     transaction_id = models.CharField(max_length=100, null=True)
 
     def __str__(self):
-		return self.id
+        return self.id
 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
@@ -44,7 +44,7 @@ class ShipingAddress(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-		return self.address
+        return self.address
 
 
 
