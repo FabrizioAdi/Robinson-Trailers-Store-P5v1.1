@@ -23,6 +23,7 @@ for (i = 0; i < updateBtns.length; i++) {
                     method:'POST',
                     headers: {
                         'Content-Type':'application/json',
+                        'X-CSRFToken':csrftoken,
                     },
                     body:JSON.stringify({'productId':productId, 'action':action})
                     })
@@ -30,7 +31,8 @@ for (i = 0; i < updateBtns.length; i++) {
                         return response.json();
                     })
                     .then((data) => {
-                        console.log('Data:', data)
+                        location.reload()
+                       
                     });
                 }
 
