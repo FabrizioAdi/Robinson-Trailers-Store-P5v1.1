@@ -49,7 +49,15 @@ def updateItem(request):
 
         orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
 
-        
-    
-    return JsonResponse('Item added to basket', safe=False)
+        if action == 'add':
+            orderItem.quantity = (orderItem.quantity +1)
+        elif action == 'remove':
+            orderItem.quantity = (orderItem.quantity -1)
+
+        orderItem.save()
+
+        if orderItem.quantity <= 0:
+                orderItem.delete()
+                
+        return JsonResponse('Item added to basket', safe=False)
 
