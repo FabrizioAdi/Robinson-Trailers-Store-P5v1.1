@@ -116,6 +116,21 @@
 
     }
 
+    if (shiping ! = 'False'){
+        shipingInfo.address =form.address.value
+        shipingInfo.city = form.city.value
+        shipingInfo.state = form.state.value
+        shipingInfo.zipcode = form.zipcode.value
+    }
+    if (user == 'AnonymousUser'){
+        userFormData.name = form.name.value
+        userFormData.email = form.email.value
+    }
+
+    console.log('ShipingInfo:', shipingInfo)
+    console.log('User Info', userFormData)
+}
+
 
 </script>
 
