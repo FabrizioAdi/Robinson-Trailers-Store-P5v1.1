@@ -46,6 +46,7 @@
         <br>
 			<div class="box-element hidden" id="payment-info">
 				<small>Peypal</small>
+                <button id="make-payment">Make payment</button>
 			</div>
     </div>
     <div class="col-lg-6">
@@ -69,5 +70,19 @@
 
     </div>
 </div>
+<script type="text/javascript">
+    var shipping = '{{order.shiping}}'
+
+    if (shipping == 'False'){
+         document.getElementById('shiping-info').innerHTML = ''
+    }
+    var form = document.getElementById('form')
+		form.addEventListener('submit', function(e){
+	    	e.preventDefault()
+	    	console.log('Form Submitted...')
+	    	document.getElementById('form-button').classList.add("hidden");
+	    	document.getElementById('payment-info').classList.remove("hidden");
+        })
+</script>
 
 {% endblock content %}
