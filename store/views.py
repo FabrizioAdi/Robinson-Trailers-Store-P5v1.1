@@ -78,3 +78,6 @@ def updateItem(request):
                 
         return JsonResponse('Item added to basket', safe=False)
 
+def processOrder(request):
+	return JsonResponse('Payment submitted..', safe=False)
+
