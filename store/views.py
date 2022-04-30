@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-import json 
+import json
+import datetime 
 
 from .models import *
 
@@ -79,5 +80,6 @@ def updateItem(request):
         return JsonResponse('Item added to basket', safe=False)
 
 def processOrder(request):
-	return JsonResponse('Payment submitted..', safe=False)
+    transaction_id = datetime.datetime.now().timestamp()
+    return JsonResponse('Payment submitted..', safe=False)
 
