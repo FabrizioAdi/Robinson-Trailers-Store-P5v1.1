@@ -54,17 +54,19 @@ def cart(request):
         item = {
             'product':{
                 'id':product.id,
-                'name':product.name,
-                'price':product.price,
-                'imageURL':product.imageURL
-            },
-        'quantity':cart[i]['quantity'],
-        'get_total':total,
+                'product':{'id':product.id,'name':product.name, 'price':product.price, 
+				'imageURL':product.imageURL}, 'quantity':cart[i]['quantity'],
+				'digital':product.digital,'get_total':total,
         }
+        
         items.append(item)
 
         if product.digital == False:
-            shipping = True
+            order['shiping'] = True
+            
+        except:
+            pass
+
             
     context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'store/cart.html', context)
