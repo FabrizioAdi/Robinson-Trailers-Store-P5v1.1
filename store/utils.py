@@ -7,7 +7,7 @@ def cookieCart(request):
 	try:
 		cart = json.loads(request.COOKIES['cart'])
 	except:
-        cart = {}
+		cart = {}
 		print('CART:', cart)
 
 	items = []
