@@ -17,7 +17,7 @@ def store(request):
     else:
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0}
-        cartItems = order['grt_cart_items']
+        cartItems = order['get_cart_items']
         
     products = Product.objects.all()
     context = {'products':products, 'cartItems':cartItems}
@@ -34,18 +34,23 @@ def cart(request):
     else:
         try:
             cart = json.loads(request.COOKIES['cart'])
+
         except:
             cart = {}
             print('CART:', cart)
             
         items = []
-        order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
         
         for i in cart:
             cartItems += cart[i]['quantity']
-        
-        
+
+            product = Product.objects.get(id=i)
+            total = (product.price * cart[i]['quantity'])
+            order = ['get_cart_total'] += total
+            order = ['get_cart_items'] += cart[i]['quantity']
+            
     context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'store/cart.html', context)
 
