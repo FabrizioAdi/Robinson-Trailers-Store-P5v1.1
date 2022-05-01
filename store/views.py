@@ -5,6 +5,7 @@ import datetime
 from .models import *
 from .utils import cookieCart
 from .utils import cookieCart, cartData
+from .utils import cookieCart, cartData, guestOrder
 
 # Create your views here.
 def store(request):
@@ -70,36 +71,10 @@ def processOrder(request):
         order, created = Order.object.get_or_create(customer=customer, commplete=False)
 
     else:
-        print('User is not looged in')
-        print('COOKIES', request.COOKIES)
+        customer, order = guestOrder(request, data)
 
-        name = data['form']['name']
-        email = data['form']['email']
-        
-        cookieData = cookieCart(request)
-        items = cookieData['items']
-        
-        customer, created = Customer.objects.get_or_create(
-				email=email,
-				)
-        customer.name = name
-        customer.save()
-        
-        order = Order.objects.create(
-			customer=customer,
-			complete=False,
-			)
-
-        for item in items:
-			product = Product.objects.get(id=item['id'])
-			orderItem = OrderItem.objects.create(
-				product=product,
-				order=order,
-				quantity=item['quantity'],
-			)
-            
-    total = float(data['form']['total'])
-    order.transaction_id = transaction_id
+        total = float(data['form']['total'])
+        order.transaction_id = transaction_id
     
     if total == order.get_cart_total:
         order.complete = True
@@ -116,4 +91,3 @@ def processOrder(request):
         )
 
     return JsonResponse('Payment submitted..', safe=False)
-
