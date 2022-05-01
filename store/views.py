@@ -4,6 +4,7 @@ import json
 import datetime
 from .models import *
 from .utils import cookieCart
+from .utils import cookieCart, cartData
 
 # Create your views here.
 def store(request):
@@ -34,7 +35,7 @@ def cart(request):
         
     else:
 		cookieData = cookieCart(request)
-		cartItems = cookieData['cartItems']
+        cartItems = cookieData['cartItems']
 		order = cookieData['order']
 		items = cookieData['items']
         
