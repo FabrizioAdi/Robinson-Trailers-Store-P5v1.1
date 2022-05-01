@@ -116,7 +116,7 @@
 
     }
 
-    if (shiping ! = 'False'){
+    if (shiping != 'False'){
         shipingInfo.address =form.address.value
         shipingInfo.city = form.city.value
         shipingInfo.state = form.state.value
@@ -129,7 +129,6 @@
 
     console.log('ShipingInfo:', shipingInfo)
     console.log('User Info', userFormData)
-}
 
 var url = "/process_order/"
 fetch(url, {
@@ -147,8 +146,6 @@ fetch(url, {
 		  alert('Transaction completed');  
 		  window.location.href = "{% url 'store' %}"
     })
-}
-
 
 </script>
 
