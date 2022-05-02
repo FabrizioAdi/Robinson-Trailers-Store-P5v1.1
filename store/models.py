@@ -8,8 +8,8 @@ class Customer(models.Model):
     name = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200)
     
-    def__str__(self):
-    return self.name
+    def __str__(self):
+        return self.name
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
@@ -78,5 +78,5 @@ class ShipingAddress(models.Model):
     zipcode = models.CharField(max_length=200, null=False)
     date_added = models.DateTimeField(auto_now_add=True)
     
-    def__str__(self):
-    return self.address
+    def __str__(self):
+        return self.address
