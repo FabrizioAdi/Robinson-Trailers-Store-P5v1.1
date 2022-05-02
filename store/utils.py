@@ -1,8 +1,8 @@
 import json
 from .models import *
 
+# Create empty cart for now for non-logged in user
 def cookieCart(request):
-	# Create empty cart for now for non-logged in user
 	try:
 		cart = json.loads(request.COOKIES['cart'])
 	except:
@@ -10,11 +10,11 @@ def cookieCart(request):
 		print('CART:', cart)
 
 	items = []
-	order = {'get_cart_total':0, 'get_cart_items': 0, 'shipping': False}
+	order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
 	cartItems = order['get_cart_items']
 
 	for i in cart:
-		# We use try block to prevent items in cart that may have been removed from causing error
+# use try block to prevent items in cart that may have been removed from error
 		try:
 			cartItems += cart[i]['quantity']
 
@@ -26,9 +26,9 @@ def cookieCart(request):
 
 			item = {
 				'id': product.id,
-				'product': {'id': product.id,'name': product.name, 'price': product.price, 
+				'product': {'id': product.id, 'name': product.name, 'price': product.price, 
 				'imageURL': product.imageURL}, 'quantity': cart[i]['quantity'],
-				'digital': product.digital,'get_total': total,
+				'digital': product.digital, 'get_total': total,
 				}
 			items.append(item)
 
@@ -37,8 +37,8 @@ def cookieCart(request):
 		except:
 			pass
 			
-	return {'cartItems':cartItems ,'order':order, 'items':items}
-
+	return {'cartItems': cartItems, 'order' :order, 'items': items}
+	
 def cartData(request):
 	if request.user.is_authenticated:
 		customer = request.user.customer
@@ -51,7 +51,7 @@ def cartData(request):
 		order = cookieData['order']
 		items = cookieData['items']
 
-	return {'cartItems':cartItems ,'order':order, 'items':items}
+	return {'cartItems': cartItems, 'order': order, 'items': items}
 
 def guestOrder(request, data):
 	name = data['form']['name']
@@ -77,5 +77,5 @@ def guestOrder(request, data):
 			product=product,
 			order=order,
 			quantity=item['quantity'],
-		)
-	return customer, order
+			)
+		return customer, order
